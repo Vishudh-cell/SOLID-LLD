@@ -1,0 +1,19 @@
+import java.util.*;
+
+public class DeviceRegistry {
+
+    private final List<Object> devices = new ArrayList<>();
+
+    public void add(Object device) {
+        devices.add(device);
+    }
+
+    public <T> T getDevice(Class<T> type) {
+        for (Object d : devices) {
+            if (type.isInstance(d)) {
+                return type.cast(d);
+            }
+        }
+        throw new IllegalStateException("Missing: " + type.getSimpleName());
+    }
+}
